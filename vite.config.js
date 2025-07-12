@@ -10,6 +10,7 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  base: "https://billiartag.github.io/t9-coder/",
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
