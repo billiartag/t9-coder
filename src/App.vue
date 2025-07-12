@@ -1,19 +1,35 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import TButton from './components/TButton.vue'
+
+const numbers = [
+  {
+    title: "1",
+    subtitle: ""
+  },
+  {
+    title: "2",
+    subtitle: "abc"
+  },
+  {
+    title: "3",
+    subtitle: "def"
+  },
+];
+
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
   </header>
 
   <main>
-    <TheWelcome />
+    <t-button
+    v-for="item in numbers"
+    :title="item.title"
+    :subtitle="item.subtitle"
+    />
   </main>
 </template>
 
