@@ -3,7 +3,7 @@
     const props = defineProps(['title','subtitle']);
 </script>
 <template>
-    <button class="btn btn-primary col-3 m-1 ">
+    <button class="btn btn-outline-secondary col-3 m-1 ">
         {{ title }}
         <br>
         {{ subtitle }}
