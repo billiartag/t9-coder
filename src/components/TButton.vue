@@ -3,7 +3,7 @@
     const props = defineProps(['title','subtitle']);
 </script>
 <template>
-    <button>
+    <button class="btn btn-primary col-3 m-1 ">
         {{ title }}
         <br>
         {{ subtitle }}
@@ -11,6 +11,6 @@
 </template>
 <style scoped>
     button {
-        padding: 20px 30px;
+        /* padding: 20px 30px; */
     }
 </style>
