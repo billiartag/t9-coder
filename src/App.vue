@@ -2,8 +2,9 @@
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import TButton from './components/TButton.vue'
+import { ref } from 'vue'
 
-var textData = "";
+var textData = ref("");
 
 const numbers = [
   {
@@ -56,10 +57,45 @@ const numbers = [
   },
 ];
 
+const combinations = {
+  a: "2",
+  b: "22",
+  c: "222",
+  d: "3",
+  e: "33",
+  f: "333",
+  g: "4",
+  h: "44",
+  i: "444",
+  j: "5",
+  k: "55",
+  l: "555",
+  m: "6",
+  n: "66",
+  o: "666",
+  p: "7",
+  q: "77",
+  r: "777",
+  s: "7777",
+  t: "8",
+  u: "88",
+  v: "888",
+  w: "9",
+  x: "99",
+  y: "999",
+  z: "9999"
+};
+
+///
+
 function addNumber(title){
   console.log(title);
-  textData += title;
+  textData.value = textData.value + title;
   console.log(textData);
+}
+
+function reverseText(){
+  console.log('current '+textData.value);
 }
 
 </script>
@@ -70,7 +106,7 @@ function addNumber(title){
       <input type="text" class="form-control" v-model="textData">
       <div class="m-2 d-flex justify-content-center">
         <button class="btn btn-primary mx-1">Process</button>
-        <button class="btn btn-outline-primary mx-1">Reverse</button>
+        <button class="btn btn-outline-primary mx-1" @click="reverseText">Reverse</button>
         <button class="btn btn-outline-primary mx-1"> 
           <i class="fa-solid fa-delete-left"></i>
         </button>
