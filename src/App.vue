@@ -88,6 +88,14 @@ const combinations = {
 };
 
 ///
+function copyText(){
+  navigator.clipboard.writeText(textData.value).then(function() {
+    console.log('Async: Copying to clipboard was successful!');
+  }, function(err) {
+    console.error('Async: Could not copy text: ', err);
+  });
+}
+
 function resetField() {
   textData.value = "";
 }
@@ -144,12 +152,11 @@ function reverseText() {
     <div class="mb-5">
       <input type="text" class="form-control" v-model="textData">
       <div class="m-2 d-flex justify-content-center">
-        <button class="btn btn-primary mx-1">Process</button>
-        <button class="btn btn-outline-primary mx-1" @click="reverseText">Reverse</button>
+        <button class="btn btn-primary mx-1" @click="reverseText">Reverse</button>
         <button class="btn btn-outline-primary mx-1" @click="resetField">
           <i class="fa-solid fa-delete-left"></i>
         </button>
-        <button class="btn btn-outline-primary mx-1">
+        <button class="btn btn-outline-primary mx-1" @click="copyText">
           <i class="fa-solid fa-copy"></i>
         </button>
       </div>
