@@ -202,19 +202,40 @@ function reverseText() {
 <template>
   <main class="container">
     <div class="mb-5">
-      <input type="text" class="form-control" v-model="textData">
+      <input
+        v-model="textData"
+        type="text"
+        class="form-control"
+      >
       <div class="m-2 d-flex justify-content-center">
-        <button class="btn btn-primary mx-1" @click="reverseText">Reverse</button>
-        <button class="btn btn-outline-primary mx-1" @click="resetField">
-          <i class="fa-solid fa-delete-left"></i>
+        <button
+          class="btn btn-primary mx-1"
+          @click="reverseText"
+        >
+          Reverse
         </button>
-        <button class="btn btn-outline-primary mx-1" @click="copyText">
-          <i class="fa-solid fa-copy"></i>
+        <button
+          class="btn btn-outline-primary mx-1"
+          @click="resetField"
+        >
+          <i class="fa-solid fa-delete-left" />
+        </button>
+        <button
+          class="btn btn-outline-primary mx-1"
+          @click="copyText"
+        >
+          <i class="fa-solid fa-copy" />
         </button>
       </div>
     </div>
     <div class=" row d-flex justify-content-center">
-      <t-button v-for="item in numbers" :title="item.title" :subtitle="item.subtitle" @click="addNumber(item.title)" />
+      <t-button
+        v-for="item in numbers"
+        :key="item.title"
+        :title="item.title"
+        :subtitle="item.subtitle"
+        @click="addNumber(item.title)"
+      />
     </div>
   </main>
 </template>
