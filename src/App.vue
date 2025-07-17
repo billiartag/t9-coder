@@ -100,11 +100,13 @@ function copyText(){
 function resetField() {
   textData.value = "";
 }
+function deleteSingle() {
+  textData.value = textData.value.slice(0,-1);
+}
 
 function addNumber(title) {
   function setTimer (){
     buttonTimer = setInterval(function(){
-        console.log("on press done");
         isOnPress = false;
 
         resetTimer();
@@ -141,7 +143,6 @@ function addNumber(title) {
       const isSame = patternLastChar.slice(-1) == title;
       if(isSame){
         var newChar = "";
-        console.log("same button");
         // check if added pattern doesnt make sense, return the title
         if(swapped[patternLastChar+title]!=null){
           newChar = swapped[patternLastChar+title];
@@ -152,7 +153,6 @@ function addNumber(title) {
         textData.value = textData.value.slice(0,-1) + newChar;
       }
       else{
-        console.log("different button");
         resetTimer();
         textData.value += swapped[title];
 
@@ -216,9 +216,15 @@ function reverseText() {
         </button>
         <button
           class="btn btn-outline-primary mx-1"
-          @click="resetField"
+          @click="deleteSingle"
         >
           <i class="fa-solid fa-delete-left" />
+        </button>
+        <button
+          class="btn btn-outline-primary mx-1"
+          @click="resetField"
+        >
+          <i class="fa-solid fa-trash-can" />
         </button>
         <button
           class="btn btn-outline-primary mx-1"
