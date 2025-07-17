@@ -1,10 +1,10 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
 import TButton from './components/TButton.vue'
 import { ref } from 'vue'
 
 var textData = ref("");
+var isOnPress = false;
+var buttonTimer = null;
 
 const numbers = [
   {
@@ -88,6 +88,7 @@ const combinations = {
 };
 
 ///
+
 function copyText(){
   navigator.clipboard.writeText(textData.value).then(function() {
     console.log('Async: Copying to clipboard was successful!');
@@ -101,13 +102,64 @@ function resetField() {
 }
 
 function addNumber(title) {
+  function setTimer (){
+    buttonTimer = setInterval(function(){
+        console.log("on press done");
+        isOnPress = false;
+
+        resetTimer();
+      }, 2000);
+  }
+  function resetTimer(){
+    clearInterval(buttonTimer);
+  }
+  if (title == '1' || title == '*' || title == '#') { return; }
+
   // check for number or string
-  if (parseFloat(textData.value) || textData.value == "") { // number
-    console.log((title == '1' || title == '*' || title == '#'));
-    if (title == '1' || title == '*' || title == '#') { return; }
+  if (parseFloat(textData.value) &&  textData.value != "") { // number
     textData.value = textData.value + title;
   } else { // string
+    // swap combination first
+    const swapped = {};
+    for (const [key, value] of Object.entries(combinations)) {
+      swapped[value] = key;
+    }
 
+    // Check for timer expired?
+    if(!isOnPress){
+      // add character
+      textData.value += swapped[title];
+      // start timer
+      isOnPress = true;
+      setTimer();
+    }
+    else{
+      // Check if current button is the same with previous char
+      const lastChar = textData.value.slice(-1);
+      const patternLastChar = combinations[lastChar];
+
+      const isSame = patternLastChar.slice(-1) == title;
+      if(isSame){
+        var newChar = "";
+        console.log("same button");
+        // check if added pattern doesnt make sense, return the title
+        if(swapped[patternLastChar+title]!=null){
+          newChar = swapped[patternLastChar+title];
+        }
+        else{
+          newChar = swapped[title];
+        }
+        textData.value = textData.value.slice(0,-1) + newChar;
+      }
+      else{
+        console.log("different button");
+        resetTimer();
+        textData.value += swapped[title];
+
+        isOnPress = true;
+        setTimer();
+      }
+    }
   }
 }
 
@@ -136,7 +188,7 @@ function reverseText() {
     // match
     groups.forEach(element => {
       if (element == " ") {
-        translated += "0"
+        translated += "0 "
       } else {
         translated += combinations[element] + " ";
       }
